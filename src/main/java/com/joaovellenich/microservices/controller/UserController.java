@@ -68,4 +68,16 @@ public class UserController {
             return ResponseEntity.badRequest().body(error.getMessage());
         }
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable("id") UUID id){
+        try{
+            logger.info("Start - deletingUser - " + id);
+            this.deleteUserUseCase.deleteUser(id);
+            return ResponseEntity.ok().build();
+        }catch (Exception error){
+            logger.severe("Error - deleteUser - " + error.getMessage());
+            return ResponseEntity.badRequest().body(error.getMessage());
+        }
+    }
 }
