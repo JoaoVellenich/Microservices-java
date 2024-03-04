@@ -4,33 +4,30 @@ import com.joaovellenich.microservices.dto.user.CreateUserDTO;
 import com.joaovellenich.microservices.dto.user.GetUsersDTO;
 import com.joaovellenich.microservices.dto.user.UpdateUserDTO;
 import com.joaovellenich.microservices.useCases.user.*;
-import jakarta.websocket.server.PathParam;
-import org.slf4j.LoggerFactory;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
 import java.util.logging.Logger;
+
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
 
-    private Logger logger = (Logger) LoggerFactory.getLogger(UserController.class);
+    private static final Logger logger = Logger.getLogger(UserController.class.getName());
     private final CreateUserUseCase createUserUseCase;
     private final GetUsersUseCase getUsersUseCase;
     private final GetUserByIdUseCase getUserByIdUseCase;
     private final UpdateUserUseCase updateUserUseCase;
     private final DeleteUserUseCase deleteUserUseCase;
     public UserController(
-            CreateUserUseCase createUserUseCase,
-            GetUsersUseCase getUsersUseCase,
-            GetUserByIdUseCase getUserByIdUseCase,
-            UpdateUserUseCase updateUserUseCase,
-            DeleteUserUseCase deleteUserUseCase
+            final CreateUserUseCase createUserUseCase,
+            final GetUsersUseCase getUsersUseCase,
+            final GetUserByIdUseCase getUserByIdUseCase,
+            final UpdateUserUseCase updateUserUseCase,
+            final DeleteUserUseCase deleteUserUseCase
     ){
         this.createUserUseCase = createUserUseCase;
         this.getUsersUseCase = getUsersUseCase;
