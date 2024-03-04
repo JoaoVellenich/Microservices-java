@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
 import java.util.logging.Logger;
 
 @RestController
@@ -55,5 +57,16 @@ public class UserController {
         logger.info("Start - getAllUsers");
         var users = this.getUsersUseCase.getUsers();
         return ResponseEntity.ok().body(users);
+    }
+
+    public ResponseEntity<Object> getUserById(UUID id){
+        try{
+            logger.info("Start - getUserById - " + id);
+            var user = this.getUserByIdUseCase.getUserById(id);
+            return ResponseEntity.ok().body(user);
+        }catch (Exception error){
+            logger.severe("Error - getUsersById - " + error.getMessage());
+            return ResponseEntity.badRequest().body(error.getMessage());
+        }
     }
 }
