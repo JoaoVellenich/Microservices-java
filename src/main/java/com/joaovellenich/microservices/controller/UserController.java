@@ -4,11 +4,9 @@ import com.joaovellenich.microservices.dto.user.CreateUserDTO;
 import com.joaovellenich.microservices.dto.user.GetUsersDTO;
 import com.joaovellenich.microservices.useCases.user.*;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Objects;
@@ -59,7 +57,8 @@ public class UserController {
         return ResponseEntity.ok().body(users);
     }
 
-    public ResponseEntity<Object> getUserById(UUID id){
+    @GetMapping("/getById/{id}")
+    public ResponseEntity<Object> getUserById(@PathVariable("id") UUID id){
         try{
             logger.info("Start - getUserById - " + id);
             var user = this.getUserByIdUseCase.getUserById(id);
